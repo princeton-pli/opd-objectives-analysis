@@ -1,0 +1,3 @@
+# Which Tokens, in What Order, and How Fast? A Theoretical Analysis of On-Policy Distillation Objectives
+
+Code will be released soon...
