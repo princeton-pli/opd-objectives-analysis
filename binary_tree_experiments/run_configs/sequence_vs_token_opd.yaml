@@ -1,0 +1,31 @@
+# Section 3.2 (Figure 2): sequence-level OPD vs. token-level OPD with RKL.
+seed: 32
+
+env_config:
+  depth: 15
+  num_children: 2
+
+policy_config:
+  d_model: 32
+  nhead: 2
+  num_layers: 3
+  dim_feedforward: 128
+
+teacher_correct_prob: 0.9999
+
+# Each objective trains with random seed `seed + seed_offset`, as in the runs reported in the paper,
+# so it gives the same results in every configuration.
+objectives:
+  - name: seq_reverse_kl
+    seed_offset: 0
+  - name: token_reverse_kl
+    seed_offset: 3000
+
+training_steps: 300
+num_rollouts: 64
+learning_rate: 0.001
+
+log_every: 10
+eval_rollouts: 512
+eval_at_steps: [0, 1, 5, 7, 10, 15, 20, 25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300]
+output_root: outputs/sequence_vs_token_opd
